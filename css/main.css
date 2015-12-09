@@ -1,4 +1,32 @@
+*{
+  font-family: exo;
+}
+html, body{
+  margin: 0px;
+  padding: 0px;
+}
 
+/*Header and friends*/
+header{
+  display: block;
+  height: 75px;
+}
+hgroup{
+  float: left;
+}
+hgroup h1{
+  margin: 0px;
+
+  text-transform: uppercase;
+}
+h3{
+  margin: 0px;
+  margin-left: 20px;
+}
+
+nav{
+  float: right;
+}
 nav ul{
   list-style-type: none;
 }
@@ -6,11 +34,15 @@ nav ul li{
   display: inline-block;
 }
 nav ul li a{
-  text-decoration: none;
+  padding: 0px 15px 0px 15px;
 
-  padding: 10px;
+  color: black;
+  font-weight: 500;
+  font-family: fantasy;
+  text-decoration: none;
 }
 
+/*Body and friends exclusive content*/
 .centerContent{
   width: 960px;
   height: 500px;
@@ -18,32 +50,29 @@ nav ul li a{
   margin-left: auto;
   margin-right: auto;
 
-  background: green;
+  background: #c4dfff;
+
+  padding: 10px;
 }
 
+/*content*/
+#tableContainer{
+  padding: 15px;
+}
+table{
+  display: inline-block;
+}
+#tableOf1{
+  margin-left: 0px;
+}
+
+/*footer*/
+footer{
+  background: gray;
+}
+
+/*Media rules*/
 @media screen and (max-width: 960px){
-  nav ul{
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-  }
-  nav ul li{
-    display: block;
-    width: 100%;
-
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-  }
-  nav ul li:first-of-type{
-    border: none;
-  }
-  nav ul li:last-of-type{
-    border: none;
-  }
-  nav ul li a{
-    width: 100%;
-  }
-
   .centerContent{
     width: 100%;
   }

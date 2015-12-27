@@ -1,15 +1,13 @@
 *{
   font-family: exo;
 }
-html, body{
-  margin: 0px;
-  padding: 0px;
-}
 
 /*Header and friends*/
 header{
   display: block;
-  height: 75px;
+  height: 85px;
+
+  padding: 10px;
 }
 hgroup{
   float: left;
@@ -23,29 +21,52 @@ h3{
   margin: 0px;
   margin-left: 20px;
 }
-
+/*nav list*/
 nav{
   float: right;
 }
 nav ul{
   list-style-type: none;
+
+  margin-top: 27px;
+  margin-right: 20px;
 }
 nav ul li{
   display: inline-block;
 }
 nav ul li a{
-  padding: 0px 15px 0px 15px;
+  padding: 20px 15px 20px 15px;
 
   color: black;
   font-weight: 500;
   font-family: fantasy;
   text-decoration: none;
+
+  /*if you change these make sure you change the ones in the hover aswel*/
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+nav ul li a:hover{
+  /*background: rgba(12, 128, 144, 0.58);*/
+
+  color: black;
+  font-weight: 500;
+  font-family: fantasy;
+  text-decoration: none;
+
+  /*if you change these make sure you change the ones in the basic aswel to match so it doesnt jump of its place*/
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+/*nav icons for list*/
+#home{
+  background: url("../media/img/homeIcon.png");
 }
 
 /*Body and friends exclusive content*/
 .centerContent{
   width: 960px;
-  height: 500px;
+  /*height: 500px;*/
 
   margin-left: auto;
   margin-right: auto;
@@ -56,14 +77,31 @@ nav ul li a{
 }
 
 /*content*/
+.smallNumberContainer{
+  width: 40px;
+}
 #tableContainer{
-  padding: 15px;
+  width: auto;
+  height: 330px;
+
+  top: 0px;
+
+  padding: 0px 15px 0px 70px;
+  margin: 10px 0px;
+
+  overflow: hidden;
+  overflow-y: scroll;
 }
 table{
   display: inline-block;
+
+  padding-right: 8%;
+  padding-bottom: 25px;
+
+  font-size: 17pt;
 }
-#tableOf1{
-  margin-left: 0px;
+td{
+  padding-right: 10px;
 }
 
 /*footer*/

@@ -5,15 +5,20 @@
     <meta charset="utf-8" />
     <meta name="author" content="Yannick Pot" />
     <meta name="keywords" content="ala, rekenen, leren, tafels, tafel, keersommen, yannick, pot" />
-    <meta name="description" content="Dit is een site waarop mensen hun keersommen kunnen oefenen." />
+    <meta name="description" content="Dit is een site waarop mensen hun keersommen kunnen oefenen, toetsen en bekijken." />
 
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 
     <title>Rekenen online, Keersommen</title>
 
     <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/normalize.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+
     <!--Javascript/other scripts-->
+    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
   </head>
   <body>
@@ -24,13 +29,13 @@
       </hgroup>
       <nav>
         <ul>
-          <li>
+          <li id="home">
             <a href="index.html">Home</a>
           </li>
-          <li>
+          <li id="leren">
             <a href="#">Leren</a>
           </li>
-          <li>
+          <li id="toets">
             <a href="#">Toets</a>
           </li>
         </ul>
@@ -40,9 +45,26 @@
       <section class="centerContent">
         <article class="overzicht" id="test">
           <h1>Overzicht</h1>
+          <!--Het onderstaande span element bevat de benodigde html voor het aanpassen voor de tafels die worden getoont in de div #tableContainer-->
+          <span>
+            Tafels
+            <input type="number" class="smallNumberContainer" id="lowestTable" name="min" min="1" value="1"/>
+            t/m
+            <input type="number" class="smallNumberContainer" id="highestTable" name="max" min="2" value="10"/>
+          </span>
+          <span id="openTables" class="btn btn-default">laat zien</span>
+
           <div id="tableContainer">
-          
+            <!--Hier komen de gekozen tafels wordt bij initialisatie gezet op de tafels 1 t/m 10-->
           </div>
+          <p>
+            <!--Below is a button that can expand the div above so that more tables are visible-->
+            <input type="button" value="Expand" class="btn btn-primary" id="toggleDiv"/>
+            <!--Below are controls for scrolling the content of the div above-->
+            <input type="button" value="Up" class="btn btn-primary" id="navUp"/>
+            <input type="button" value="Down" class="btn btn-primary" id="navDown"/>
+            <!--Above are the controls for navigating the content of the div above-->
+          </p>
         </article>
         <article>
           <h1>Oefenen</h1>

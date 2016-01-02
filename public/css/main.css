@@ -3,25 +3,23 @@
 }
 
 /*Header and friends*/
-header{
-  display: block;
-  height: 85px;
-
-  padding: 10px;
+.navbar{
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-hgroup{
+.navbar-brand{
   float: left;
 }
-hgroup h1{
+.navbar-brand h1{
   margin: 0px;
-
+  margin-top: -20px;
   text-transform: uppercase;
 }
-h3{
+.navbar-brand h3{
   margin: 0px;
   margin-left: 20px;
 }
-/*nav list*/
+/*nav list*//*
 nav{
   float: right;
 }
@@ -42,27 +40,27 @@ nav ul li a{
   font-family: fantasy;
   text-decoration: none;
 
-  /*if you change these make sure you change the ones in the hover aswel*/
+  /*if you change these make sure you change the ones in the hover aswel
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
 }
 nav ul li a:hover{
-  /*background: rgba(12, 128, 144, 0.58);*/
+  /*background: rgba(12, 128, 144, 0.58);
 
   color: black;
   font-weight: 500;
   font-family: fantasy;
   text-decoration: none;
 
-  /*if you change these make sure you change the ones in the basic aswel to match so it doesnt jump of its place*/
+  /*if you change these make sure you change the ones in the basic aswel to match so it doesnt jump of its place
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
-/*nav icons for list*/
+/*nav icons for list
 #home{
   background: url("../media/img/homeIcon.png");
 }
-
+*/
 /*Body and friends exclusive content*/
 .centerContent{
   width: 960px;
@@ -103,7 +101,15 @@ table{
 td{
   padding-right: 10px;
 }
-
+input{
+  width: 60px;
+}
+.correct{
+  background-color: rgba(18, 167, 0, 0.5);
+}
+.wrong{
+  background-color: rgba(226, 9, 9, 0.5);
+}
 /*footer*/
 footer{
   background: gray;

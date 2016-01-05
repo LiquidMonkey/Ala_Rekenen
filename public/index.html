@@ -51,37 +51,43 @@
     <main>
       <section class="centerContent">
         <article class="overzicht" id="test">
-          <h1>Overzicht</h1>
-          <!--Het onderstaande span element bevat de benodigde html voor het aanpassen voor de tafels die worden getoont in de div #tableContainer-->
-          <span>
-            Tafels
-            <input type="number" class="smallNumberContainer" id="lowestTable" name="min" min="1" value="1"/>
-            t/m
-            <input type="number" class="smallNumberContainer" id="highestTable" name="max" min="2" value="10"/>
-          </span>
-          <span id="openTables" class="btn btn-default">laat zien</span>
+          <h1 class="toggleDiv">Overzicht <span class="arrow"></span></h1>
+          <div>
+            <!--Het onderstaande span element bevat de benodigde html voor het aanpassen voor de tafels die worden getoont in de div #tableContainer-->
+            <span>
+              Tafels
+              <input type="number" class="smallNumberContainer" id="lowestTable" name="min" min="1" value="1"/>
+              t/m
+              <input type="number" class="smallNumberContainer" id="highestTable" name="max" min="2" value="10"/>
+            </span>
+            <span id="openTables" class="btn btn-default">laat zien</span>
 
-          <div id="tableContainer">
-            <!--Hier komen de gekozen tafels wordt bij initialisatie gezet op de tafels 1 t/m 10-->
+            <div id="tableContainer">
+              <!--Hier komen de gekozen tafels wordt bij initialisatie gezet op de tafels 1 t/m 10-->
+            </div>
           </div>
-          <p>
-            <!--Below is a button that can expand the div above so that more tables are visible-->
-            <input type="button" value="Expand" class="btn btn-primary" id="toggleDiv"/>
-            <!--Below are controls for scrolling the content of the div above-->
-            <input type="button" value="Up" class="btn btn-primary" id="navUp"/>
-            <input type="button" value="Down" class="btn btn-primary" id="navDown"/>
-            <!--Above are the controls for navigating the content of the div above-->
-          </p>
         </article>
         <article>
-          <h1>Oefenen</h1>
-    		  <div id="practiceTables">
+          <h1 class="toggleDiv">(Oefen-)toets <span class="arrow"></span></h1>
+          <div>
+            <div class="choiceContainer">
+              <div id="oefenen">
 
-    		  </div>
-          <input type="button" value="check" class="btn btn-primary" id="checkOefenen"/>
-        </article>
-        <article>
-          <h1>Toets</h1>
+              </div>
+              <div id="toetsen">
+
+              </div>
+            </div>
+      		  <div id="practiceTables">
+
+      		  </div>
+            <input type="button" value="check" class="btn btn-primary hidden" id="checkToets"/>
+          </div>
+          <div class="test">
+            <input type="text" readonly="true" class="vraag"/>
+            <br/>
+            <input type ="text" placeholder="antwoord"/>
+          </div>
         </article>
       </section>
     </main>

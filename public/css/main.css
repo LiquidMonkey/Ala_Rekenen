@@ -1,5 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Exo);
 *{
-  font-family: exo;
+  font-family: Exo;
+  color: black;
+  font-weight: 600;
+}
+
+body{
+  background: url("../media/backgroundTexture.jpg");
 }
 
 /*Header and friends*/
@@ -69,14 +76,46 @@ nav ul li a:hover{
   margin-left: auto;
   margin-right: auto;
 
-  background: #c4dfff;
+  background: rgba(128, 182, 255, 0.95);
 
   padding: 10px;
 }
 
 /*content*/
+
+/*H1 open and closing arrows css*/
+h1, .arrow{
+  cursor: pointer;
+}
+h1 .arrow{
+  display: inline-block;
+  width: 37.5px;
+  height: 37.5px;
+
+  margin-left: 10px;
+
+  background: url("../media/arrowSprite.png") no-repeat top right;
+  background-size: 75px;
+}
+h1:hover .arrow{
+  background: url("../media/arrowSprite.png") no-repeat bottom left;
+  background-size: 75px;
+}
+h1.open .arrow{
+  background: url("../media/arrowSprite.png") no-repeat bottom right;
+  background-size: 75px;
+}
+h1.open:hover .arrow{
+  background: url("../media/arrowSprite.png") no-repeat top left;
+  background-size: 75px;
+}
+/*End of! H1 open and closing arrows css*/
+
 .smallNumberContainer{
   width: 40px;
+  padding-left: 5px;
+
+  background: rgb(101, 165, 249);
 }
 #tableContainer{
   width: auto;
@@ -110,9 +149,50 @@ input{
 .wrong{
   background-color: rgba(226, 9, 9, 0.5);
 }
+#practiceTables{
+  display: none;
+}
 /*footer*/
 footer{
+  clear: both;
+
   background: gray;
+}
+
+
+.choiceContainer{
+  width: 100%;
+
+  overflow: auto;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#oefenen, #toetsen{
+  width: 50%;
+  height: 300px;
+
+  border: solid black 2px;
+}
+
+#oefenen:hover, #toetsen:hover{
+  border: solid white 2px;
+
+  cursor: pointer;
+}
+
+#oefenen{
+  float: left;
+
+  background: white url("../media/oefenen.gif") no-repeat bottom right;
+  background-size: cover;
+}
+#toetsen{
+  float: right;
+
+  background: gray url("../media/toets.gif") no-repeat bottom right;
+  background-size: cover;
 }
 
 /*Media rules*/
@@ -120,4 +200,23 @@ footer{
   .centerContent{
     width: 100%;
   }
+}
+@media screen and (max-width: 640px){
+  #oefenen, #toetsen{
+    clear:both;
+    float: none;
+
+    width: 300px;
+  }
+}
+
+.test input{
+  margin: 0px;
+
+  width: 100px;
+  text-align: center;
+  border: 0px;
+}
+.test input:last-child{
+  border: 1px solid black;
 }

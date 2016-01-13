@@ -1,55 +1,74 @@
 $(document).ready(function(){
   initButtons();
-  $(".vraag").val('1 x 3');
+  $(".test").fadeOut(0);
   $(".toggleDiv").click().click();//makes sure the divs are closed
+  $(".toggleDiv").eq(0).click();
+  $("#checkToets").fadeOut(0).next().fadeOut(0);//hides the two button that are at the end of the toets section so they dont show up untill the user choses to make the test
 
-  //var tableRow = "<tr class='"+ tableNumber +"'> <td> " + tableNumber + " </td> <td> x </td> <td> " + tableMultiplier + " </td> <td>=</td> <td>" + tableNumber*tableMultiplier + "</td> </tr>";
+  //initializing global variables high and low
+  low = parseInt( $("#lowestTable").val() );
+  high = parseInt( $("#highestTable").val() );
+  $("#lowestTable, #highestTable").on("change", function(){
+    var lowTable = $("#lowestTable");
+    var highTable = $("#highestTable");
+    if( parseInt( lowTable.val() ) > parseInt( highTable.val() ) ){
+      high = parseInt( lowTable.val() );
+      highTable.val(parseInt( lowTable.val() ));
 
-  var tableRow ="<tr class='?'> <td>?</td> <td>x</td> <td>?</td> <td>=</td> <td>?</td> </tr>";
+      low = parseInt( highTable.val() );
+      lowTable.val(parseInt( highTable.val() ));
+    } else {
+      low = parseInt( $("#lowestTable").val() );
+      high = parseInt( $("#highestTable").val() );
+    }
+  });
 
-  var low = $("#lowestTable").val();
-  var high = $("#highestTable").val();
+  var tableRow ="<tr class='?'> <td class='number'>?</td> <td>x</td> <td class='multiplier'>?</td> <td>=</td> <td>?</td> </tr>";
 
   var target = $("#tableContainer");
-  openTables(low, high, tableRow, target);
+  openTables(tableRow, target);
 
-  var tableRow2 ="<tr class='toetsVraag ?'> <td>?</td> <td>x</td> <td>?</td> <td>=</td> <td data-answer='?'><input class='answer' type='number' value='0' min='0'/></td> </tr>";
-  var target2 = $("#practiceTables");
-  openTables(low, high, tableRow2, target2);
+  initQuestions();
+  questionairBehaviour();
 
   preventEmptyInput();//this function prevents inputfields of the number type to be empty
-
-  //doesnt work!!!! supposed to make sure the highestTable input value is never lower then the lowestTable value
-  var spinner = document.getElementById('lowestTable');
-  spinner.stepUp = function(num){
-    if( this.value != document.getElementById('highestTable').value ){
-      this.value += num;
-    }
-  };
 });
+
+/*global variables*/
+var low;
+var high;
+
+//below are mainy used for openTables(row, target)
+var highestTable = 10;
+var highestMultiplier = 10;
+var id = 0;
+
+//below are for questionairBehaviour and for finishTest
+var oefenenProgress = 0;
+var fouten = 0;
+/*end global variables*/
 
 function initButtons(){
   //following button opens the tables if the standard values of the spinners has been changed
   $("#openTables").click(function(){
-    var low = $("#lowestTable").val();//gets the value of the element with the id #lowestTable
-    var high = $("#highestTable").val();//gets the value of the element with id #highestTable
-
     var tableRow = "<tr class='?'> <td>?</td> <td>x</td> <td>?</td> <td>=</td> <td>?</td> </tr>";
     var target = $("#tableContainer");
 
-    openTables(low, high, tableRow, target);//opens the tables x till and including y
+    openTables(tableRow, target);//opens the tables x till and including y
   });
 
-  $("#oefenen, #toetsen").click(function(){
-    $(this).parent().addClass("hidden").next().show();
-    var soort = $(this).attr("id");
-    if(soort === "oefenen"){
-      soort = "Oefen toets";
-    } else {
-      soort = "Toets";
-    }
-    $("#checkToets").removeClass("hidden");
-    $(this).closest("article").children("h1").text(soort).append(" <span class=\"arrow\"></span>");
+  $("#toetsen").click(function(){
+    var tableRow ="<tr class='toetsVraag ?'> <td>?</td> <td>x</td> <td>?</td> <td>=</td> <td data-answer='?'><input class='answer' type='number' value='0' min='0'/></td> </tr>";
+    var target = $("#practiceTables");
+    openTables(tableRow, target);
+
+    $(this).parent().fadeOut(100).next().fadeIn(300);
+    $("#checkToets").fadeIn(0);
+    $(this).closest("article").children("h1").text("Toets").append(" <span class=\"arrow\"></span>");
+  });
+  $("#oefenen").click(function(){
+    $(this).parent().fadeOut(100).next().next().fadeIn(300);
+    $(this).closest("article").children("h1").text("Oefentoets").append(" <span class=\"arrow\"></span>");
   });
 
   $(".toggleDiv").click(function(){
@@ -72,7 +91,7 @@ function initButtons(){
 
   $("#checkToets").click(function(){
     var inputs = $("input[class~=answer]");
-    jQuery.makeArray(inputs).forEach(function(entry){
+    jQuery.makeArray(inputs).forEach(function(entry){//makes jquery object into an array so i can loop through it with a forEach loop
       if( $(entry).val() == $(entry.parentElement).data("answer") ){
         $(entry).removeClass("wrong");
         $(entry).addClass("correct");
@@ -81,6 +100,10 @@ function initButtons(){
         $(entry).addClass("wrong");
       }
     });
+    $(this).hide().next().show();
+  });
+  $("#closeToets").click(function(){
+    $(this).hide().prev().prev().prev().fadeOut(100).prev().fadeIn(300);
   });
 
 }
@@ -89,13 +112,10 @@ function animateDivSize(target, size) {
   $(target).animate( {'height' : size} );
 }
 
-var highestTable = 10;
-var highestMultiplier = 10;
-var id = 0;
-function openTables( low, high, tableRow, target){
+function openTables(tableRow, target){
   var ident;
-  var startingTable = parseInt(low);
-  highestTable = parseInt(high);//this variable has been initialized above the initTables function
+  var startingTable = low;
+  highestTable = high;//this variable has been initialized above the initTables function
 
   target.contents().remove();//empty the container
 
@@ -105,7 +125,7 @@ function openTables( low, high, tableRow, target){
     for(var tableMultiplier = 1; tableMultiplier < highestMultiplier+1; tableMultiplier++){
 	    ident = "tableOf" + id;
       var transformedRow = transformString(tableNumber, tableMultiplier, tableRow);
-      transformedRow = insertPossibilities(transformedRow, tableNumber, tableMultiplier);
+      //transformedRow = insertPossibilities(transformedRow, tableNumber, tableMultiplier);
       $("#"+ident+" tbody").append(transformedRow);
     }
   }
@@ -114,10 +134,11 @@ function openTables( low, high, tableRow, target){
 function transformString(tableNumber, tableMultiplier, tableRow){
   var splitString = tableRow.concat().split('?');
   var newString = "";
-  newString = splitString[0] + tableNumber + splitString[1] + tableNumber + splitString[2] + tableMultiplier + splitString[3] + (tableNumber*tableMultiplier) + splitString[4];
+  newString = splitString[0] + tableNumber + splitString[1] + tableMultiplier + splitString[2] + tableNumber + splitString[3] + (tableNumber*tableMultiplier) + splitString[4];
   return newString;
 }
 
+/*InsertPossibilities and generatePossibilities are removed and are not used in final product*/
 function insertPossibilities(row, tableNumber, tableMultiplier){
   if(/\sclass='toetsVraag\b/i.test(row) === true){
     var newRow = "";
@@ -156,7 +177,7 @@ function generatePossibilities(number, multiplier){
     } else {
       var possibility = Math.floor(Math.random()*answer+10) + number;//random number that is higher then that number but never higher then the answer+10
 
-//Checks if possibility is acceptable
+      //Checks if possibility is acceptable
     //possibility needs to be a multiple of or needs to be the number
     if( (possibility % number) === 1){
       acceptable = false;
@@ -174,7 +195,6 @@ function generatePossibilities(number, multiplier){
       if(acceptable === true){ //acceptable is true push possibility in array else make a new possibility
         possibilities.push(possibility);
       }
-
       i--;
       if(i < 0){
         i = 0;
@@ -192,8 +212,9 @@ function generatePossibilities(number, multiplier){
   return possibilities;
 }
 
+
 function preventEmptyInput(){
-	$("input[type=number]").on("keyup", function(){
+	$("input[type=number]").on("blur", function(){
 		var check;
 		if( $(this).val() != "" ){
 			check = $(this).val();
@@ -205,4 +226,106 @@ function preventEmptyInput(){
 			$(this).val(0);
 		}
 	});
+}
+
+function initQuestions() {
+  //var randomQuestion = Math.round( Math.random() * ((high - low) * 10) );
+  var num = Math.floor(Math.random() * 10) + 1;
+  var multiplier = Math.floor(Math.random() * high) + low;
+
+  $(".vraag").val(num + " x " + multiplier);
+}
+
+function questionairBehaviour(){
+  var triesLeft = 2;
+  $('.antwoord').on("keyup", function(){
+    if(event.keyCode == 13){
+      if( checkAnswer($(this)) ){
+        $(this).val("");
+        oefenenProgress += 10;
+        $('.progress-bar').css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
+        if(oefenenProgress != 100){
+          initQuestions();
+        } else {
+          finishTest(fouten);
+          initQuestions();
+          oefenenProgress = 0;
+          $(".progress-bar").css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
+          $(".antwoord").removeClass("correct");
+        }
+      } else {
+        if(fouten > 10){
+          finishTest(fouten);
+        } else {
+          triesLeft--;
+          $("#userInformation").text("U krijgt nog één kans om deze vraag goed te beantwoorden");
+          fouten += 1;
+          if(triesLeft == 0){
+            initQuestions();
+            triesLeft = 2;
+          }
+        }
+      }
+    }
+  }).on("keydown", function(){
+    var currentClass;
+    if($(this).hasClass("correct")){
+      currentClass = "correct";
+    } else if($(this).hasClass("wrong")) {
+      currentClass = "wrong";
+    } else {
+      //function shouldnt do anything because it has no classes to remove
+    }
+    if(currentClass != ""){
+      $(this).toggleClass(currentClass);
+    }
+  });
+}
+
+function checkAnswer(obj){
+  var userAnswer = obj.val();
+  var answer = obj.prev().prev().val();
+  answer = answer.split(' ');
+  answer = answer[0] * answer[2];
+  if(userAnswer == answer){
+    judge(obj, true);
+    return true;
+  } else {
+    judge(obj, false);
+    return false;
+  }
+}
+
+function judge(target, mission){
+  if(mission == true && target.hasClass('correct') || mission == false && target.hasClass('wrong')){
+    //do nothing because the class is already what it should be changed to
+  } else if( target.hasClass('wrong') ){
+    target.toggleClass('wrong');
+    target.toggleClass('correct');
+  } else if (target.hasClass('correct')){
+    target.toggleClass('correct');
+    target.toggleClass('wrong');
+  } else{
+    if(mission == true){
+      target.addClass("correct");
+    } else if (mission == false){
+      target.addClass("wrong");
+    } else {
+      throw new console.error("SOMETHING WENT HORRIBLY WRONG! please help me i dont know what to do tell them i dont know how to judge!");
+    }
+  }
+}
+
+function finishTest(aantalFout){
+  $("#resultTrigger").click();
+  $('#result').focus();
+  var cijfer = 10 - aantalFout * 0.5; //elke fout cost dus een half punt
+  $(".modal-body").text("").append("U had " + aantalFout + " vragen fout. Uw cijfer is dus: " + cijfer);
+  resetTests();
+}
+
+function resetTests(){
+  $(".test").fadeOut(100);
+  $(".antwoord").removeClass("correct");
+  $(".choiceContainer").fadeIn(300);
 }

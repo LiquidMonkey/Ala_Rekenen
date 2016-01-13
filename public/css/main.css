@@ -15,8 +15,11 @@ body{
   padding-bottom: 10px;
 }
 .navbar-brand{
-  float: left;
+  /*width: 100px;
+  background: url("../media/BoterbloempjeLogoFull.gif") center center no-repeat;
+  background-size: contain;*/
 }
+
 .navbar-brand h1{
   margin: 0px;
   margin-top: -20px;
@@ -26,40 +29,25 @@ body{
   margin: 0px;
   margin-left: 20px;
 }
-/*nav list*//*
-nav{
-  float: right;
-}
-nav ul{
-  list-style-type: none;
 
-  margin-top: 27px;
-  margin-right: 20px;
-}
-nav ul li{
-  display: inline-block;
-}
+/*nav modifiers*/
 nav ul li a{
   padding: 20px 15px 20px 15px;
 
-  color: black;
   font-weight: 500;
-  font-family: fantasy;
   text-decoration: none;
 
-  /*if you change these make sure you change the ones in the hover aswel
+  /*if you change these make sure you change the ones in the hover aswel*/
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
 }
 nav ul li a:hover{
-  /*background: rgba(12, 128, 144, 0.58);
+  background: rgba(12, 128, 144, 0.58);
 
-  color: black;
-  font-weight: 500;
-  font-family: fantasy;
+  font-weight: 600;
   text-decoration: none;
 
-  /*if you change these make sure you change the ones in the basic aswel to match so it doesnt jump of its place
+  /*if you change these make sure you change the ones*/
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
@@ -82,6 +70,14 @@ nav ul li a:hover{
 }
 
 /*content*/
+.subtext{
+  color: rgb(87, 87, 87);
+
+  position: relative;
+  top: 10px;
+
+  vertical-align: sub;
+}
 
 /*H1 open and closing arrows css*/
 h1, .arrow{
@@ -111,6 +107,13 @@ h1.open:hover .arrow{
 }
 /*End of! H1 open and closing arrows css*/
 
+.padding{
+  padding-top: 20px;
+}
+#userInformation{
+  display: inline-block;
+  max-width: 200px;
+}
 .smallNumberContainer{
   width: 40px;
   padding-left: 5px;
@@ -138,8 +141,10 @@ table{
   font-size: 17pt;
 }
 td{
+  text-align: right;
   padding-right: 10px;
 }
+
 input{
   width: 60px;
 }
@@ -154,12 +159,15 @@ input{
 }
 /*footer*/
 footer{
+  margin-top: 15px;
+  padding: 10px;
+
   clear: both;
 
   background: gray;
 }
 
-
+/*Still needs to be placed correctly*/
 .choiceContainer{
   width: 100%;
 
@@ -210,13 +218,61 @@ footer{
   }
 }
 
+.test{
+  width: 40%;
+
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 140px;
+}
+
 .test input{
+  width: 200px;
+  height: 40px;
+
   margin: 0px;
 
-  width: 100px;
   text-align: center;
   border: 0px;
 }
 .test input:last-child{
   border: 1px solid black;
+}
+
+.questionContainer{
+  position: relative;
+  left: 70px;
+  bottom: 121px;
+}
+
+/*progress bar*/
+.progressContainer {
+  margin-top: 60px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+
+  position: relative;
+}
+.vertical {
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+  transform: rotate(-90deg);
+
+  position: relative;
+  right: 50px;
+}
+.vertical {
+  box-shadow: inset 0px 4px 6px #ccc;
+}
+/*Bootstrap overrides*/
+.progress-bar {
+  box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
+}
+/*end progress-bar*/
+.btn-primary{
+  width: 90px;
 }

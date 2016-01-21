@@ -42,7 +42,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
 			<li class="active" role="presentation"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-			<li role="presentation"><a href="#practiceTables">Leren</a></li>
+			<!--<li role="presentation"><a href="#practiceTables">Leren</a></li>-->
 			<li role="presentation"><a href="toets.html">Toetsen</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
@@ -55,7 +55,7 @@
           Tafels
           <input type="number" class="smallNumberContainer" id="lowestTable" name="min" min="1" value="1"/>
           t/m
-          <input type="number" class="smallNumberContainer" id="highestTable" name="max" min="2" value="10"/>
+          <input type="number" class="smallNumberContainer" id="highestTable" name="max" min="1" value="10"/>
           <span id="openTables" class="btn btn-default">laat zien</span>
           <span class="subtext">
             Verander deze waardes om de toets tafels en overzichts tafels te veranderen.
@@ -71,7 +71,7 @@
         </article>
         <article>
           <h1 class="toggleDiv">(Oefen-)toets <span class="arrow"></span></h1>
-          <div>
+          <div class="testDiv">
             <div class="choiceContainer">
               <div id="oefenen">
 
@@ -85,14 +85,16 @@
       		  </div>
 
             <div class="test">
-              <div class="progressContainer">
-                <div class="progress vertical">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
-                    aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                    <span class="sr-only">70% Complete</span>
+              <img src="./media/fuelStation.png" class="fuelStation"/>
+              <span class="fuelProgress">0</span>
+                <div class="progressContainer">
+                  <div class="progress vertical">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="0"
+                      aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                      <span class="sr-only">70% Complete</span>
+                    </div>
                   </div>
                 </div>
-              </div>
               <div class="questionContainer">
                 <span id="userInformation">Druk op enter om uw antwoord te controleren</span>
                 </br>
@@ -107,6 +109,9 @@
           </div>
         </article>
       </section>
+      <div class="centerContent notGreen">
+        <img alt="image of a projector that projects the numbers and everything above" src="./media/projector.png"/>
+      </div>
     </main>
     <footer>
       <span>

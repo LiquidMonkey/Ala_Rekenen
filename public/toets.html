@@ -15,6 +15,7 @@
     <!--<link rel="stylesheet" type="text/css" href="./css/normalize.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/toets.css"/>
 
     <!--Javascript/other scripts-->
     <script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
@@ -42,7 +43,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
 			<li role="presentation"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-			<li role="presentation"><a href="#practiceTables">Leren</a></li>
+			<!--<li role="presentation"><a href="#practiceTables">Leren</a></li>-->
 			<li class="active" role="presentation"><a href="toets.html">Toetsen</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
@@ -75,14 +76,16 @@
       		  </div>
 
             <div class="test">
-              <div class="progressContainer">
-                <div class="progress vertical">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
-                    aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                    <span class="sr-only">70% Complete</span>
+              <img src="./media/fuelStation.png" class="fuelStation"/>
+              <span class="fuelProgress">0</span>
+                <div class="progressContainer">
+                  <div class="progress vertical">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="0"
+                      aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                      <span class="sr-only">70% Complete</span>
+                    </div>
                   </div>
                 </div>
-              </div>
               <div class="questionContainer">
                 <span id="userInformation">Druk op enter om uw antwoord te controleren</span>
                 </br>
@@ -97,6 +100,9 @@
           </div>
         </article>
       </section>
+      <div class="centerContent notGreen">
+        <img alt="image of a projector that projects the numbers and everything above" src="./media/projector.png"/>
+      </div>
     </main>
     <footer>
       <span>

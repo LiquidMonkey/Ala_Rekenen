@@ -11,15 +11,17 @@ $(document).ready(function(){
   $("#lowestTable, #highestTable").on("change", function(){
     var lowTable = $("#lowestTable");
     var highTable = $("#highestTable");
-    if( parseInt( lowTable.val() ) > parseInt( highTable.val() ) ){
+    if( parseInt( lowTable.val() ) > parseInt( highTable.val() ) && parseInt( lowTable.val() ) != "" && parseInt( highTable.val() ) != ""){
       high = parseInt( lowTable.val() );
       highTable.val(parseInt( lowTable.val() ));
 
       low = parseInt( highTable.val() );
       lowTable.val(parseInt( highTable.val() ));
-    } else {
+    } else if( parseInt( lowTable.val() ) != "" && parseInt( highTable.val() ) != "" ){
       low = parseInt( $("#lowestTable").val() );
       high = parseInt( $("#highestTable").val() );
+    } else{
+      //does nothing because they are invalid inputs therefore nothing has changed
     }
   });
 
@@ -81,16 +83,9 @@ function initButtons(){
     }
   });
 
-  //nav for tables #tableContainer
-  $("#navUp").click(function(){
-    animateDivSize('-=355px');
-  });
-  $("#navDown").click(function(){
-    animateDivSize('+=355px');
-  });
-
   $("#checkToets").click(function(){
     var inputs = $("input[class~=answer]");
+    fouten = 0;//making sure that fouten = 0 before adding anything
     jQuery.makeArray(inputs).forEach(function(entry){//makes jquery object into an array so i can loop through it with a forEach loop
       if( $(entry).val() == $(entry.parentElement).data("answer") ){
         $(entry).removeClass("wrong");
@@ -98,18 +93,23 @@ function initButtons(){
       } else {
         $(entry).removeClass("correct");
         $(entry).addClass("wrong");
+        fouten++;
       }
     });
     $(this).hide().next().show();
   });
   $("#closeToets").click(function(){
+    $("#resultTrigger").click();
+    $('#result').focus();
+    var totalQuestions = $(".toetsVraag").length;
+    var cijfer = (totalQuestions - fouten) / totalQuestions * 100; //elke fout cost dus een half punt
+    $(".modal-body").text("").append("U had " + fouten + " vragen van de " + totalQuestions + " fout. Uw score is dus " + cijfer + "%");
+    if(cijfer < 50){
+      $(".modal-body").append("<a id='download' href='./oefenblad.pdf' class='btn btn-primary btn-lg' target='_blank'>Download oefenblad</a>");
+    }
     $(this).hide().prev().prev().prev().fadeOut(100).prev().fadeIn(300);
   });
 
-}
-
-function animateDivSize(target, size) {
-  $(target).animate( {'height' : size} );
 }
 
 function openTables(tableRow, target){
@@ -223,7 +223,7 @@ function preventEmptyInput(){
 		}
 
 		if( check === false ){
-			$(this).val(0);
+			$(this).val(1);
 		}
 	});
 }
@@ -244,17 +244,19 @@ function questionairBehaviour(){
         $(this).val("");
         oefenenProgress += 10;
         $('.progress-bar').css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
+        $(".fuelProgress").text(oefenenProgress);
         if(oefenenProgress != 100){
           initQuestions();
         } else {
-          finishTest(fouten);
           initQuestions();
+          finishTest(fouten);
           oefenenProgress = 0;
           $(".progress-bar").css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
+          $(".fuelProgress").text(oefenenProgress);
           $(".antwoord").removeClass("correct");
         }
       } else {
-        if(fouten > 10){
+        if(fouten > 20){
           finishTest(fouten);
         } else {
           triesLeft--;
@@ -263,6 +265,7 @@ function questionairBehaviour(){
           if(triesLeft == 0){
             initQuestions();
             triesLeft = 2;
+            $("#userInformation").text("Vul de tank!");
           }
         }
       }
@@ -317,10 +320,15 @@ function judge(target, mission){
 }
 
 function finishTest(aantalFout){
-  $("#resultTrigger").click();
-  $('#result').focus();
   var cijfer = 10 - aantalFout * 0.5; //elke fout cost dus een half punt
   $(".modal-body").text("").append("U had " + aantalFout + " vragen fout. Uw cijfer is dus: " + cijfer);
+  if(cijfer < 5.5){
+    $(".modal-body").append("<a id=\"download\" href=\"./oefenblad.pdf\" class=\"btn btn-primary btn-lg\" target=\"_blank\">Download oefenblad</a>");
+  }
+
+  $("#resultTrigger").click();
+  $('#result').focus();
+
   resetTests();
 }
 

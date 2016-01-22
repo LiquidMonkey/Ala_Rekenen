@@ -9,10 +9,6 @@ body{
   background: url("../media/Simple-space.png") 0 0 no-repeat, url("../media/Simple-space-noPlanet.png") center center;
 }
 
-.testDiv{
-  padding: 10px;
-}
-
 /*scrollbar*/
 ::-webkit-scrollbar {
     width: 15px;
@@ -139,7 +135,7 @@ h1.open:hover .arrow{
 /*End of! H1 open and closing arrows css*/
 
 .padding{
-  padding-top: 20px;
+  padding-bottom: 30px;
 }
 #userInformation{
   display: inline-block;
@@ -191,16 +187,10 @@ input{
 
 /*Test css (oefenen)*/
 .test{
-  width: 40%;
 
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-
+  margin-top: 47px;
+  margin-left: 40%;
   height: 140px;
-
-  /*position: relative;
-  bottom: 250px;*/
 }
 
 .test input{
@@ -219,23 +209,28 @@ input{
 .questionContainer{
   position: relative;
   left: 70px;
-  bottom: 350px;
+  bottom: 349px;
 }
 
 /*progress bar*/
 .fuelStation{
   position: relative;
-  left: -191px;
-  bottom: 38px;
+  left: -183px;
+  bottom: 41px;
 }
 .fuelProgress{
   position: relative;
-  left: -360px;
+  left: -435px;
   bottom: 61px;
+}
+.spaceShip{
+  position: relative;
+  left: -402px;
+  top: 23px;
 }
 .progressContainer {
   position: relative;
-  bottom: 231px;
+  top: -231px;
 
   margin-top: 60px;
   padding-top: 20px;
@@ -331,9 +326,14 @@ footer{
   .centerContent{
     width: 100%;
   }
-  img{
-    left: 0px;
+
+  article{
+    min-width: 500px;
   }
+  .padding{
+    min-width: 600px;
+  }
+
 }
 @media screen and (max-width: 640px){
   #oefenen, #toetsen{

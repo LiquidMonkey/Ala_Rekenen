@@ -249,11 +249,14 @@ function questionairBehaviour(){
           initQuestions();
         } else {
           initQuestions();
-          finishTest(fouten);
-          oefenenProgress = 0;
-          $(".progress-bar").css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
-          $(".fuelProgress").text(oefenenProgress);
-          $(".antwoord").removeClass("correct");
+          flyAway();
+          setTimeout(function(){
+            finishTest(fouten);
+            oefenenProgress = 0;
+            $(".progress-bar").css('width', oefenenProgress+'%').attr('aria-valuenow', oefenenProgress);
+            $(".fuelProgress").text(oefenenProgress);
+            $(".antwoord").removeClass("correct");
+          },1000);
         }
       } else {
         if(fouten > 20){
@@ -283,6 +286,11 @@ function questionairBehaviour(){
       $(this).toggleClass(currentClass);
     }
   });
+}
+
+function flyAway(){
+  $(".spaceShip").animate({left: "-=900px", top: "-=200px"}, 1000);
+  $(".spaceShip").animate({left: "+=900px", top: "+=200px"});
 }
 
 function checkAnswer(obj){
